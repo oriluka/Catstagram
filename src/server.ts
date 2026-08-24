@@ -10,19 +10,11 @@ fastify.get('/', async (request, reply) => {
   return { hello: 'world' }
 })
 
-// Start the server and listen on port 3000
-const start = async (): Promise<void> => {
-  try {
-    const address = await fastify.listen({
-      port: 3000,
-      host: '0.0.0.0',
-    })
 
-    fastify.log.info(`Server listening at ${address}`)
-  } catch (err) {
+// Run the server!
+fastify.listen({ port: 3000 }, function (err, address) {
+  if (err) {
     fastify.log.error(err)
     process.exit(1)
-  }
-}
-
-start()
+  }})
+  // Server is now listening on ${address}
