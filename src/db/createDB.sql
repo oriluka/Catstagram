@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS users (
     displayName VARCHAR(16) NOT NULL,
     userName VARCHAR(12) NOT NULL,
     tag VARCHAR(200),
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(60) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 
@@ -20,7 +22,7 @@ CREATE TABLE IF NOT EXISTS cats (
     catName CHAR(16),
     likes CHAR(50),
     dislikes CHAR (50),
-    age INT
+    birthdate DATE
 )
 
 CREATE TABLE IF NOT EXISTS photos (
