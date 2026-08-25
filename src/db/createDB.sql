@@ -1,10 +1,11 @@
 CREATE DATABASE IF NOT EXISTS catgram;
 USE catgram;
 
+-- prob dont need userName userID primary key can be that 
 CREATE TABLE IF NOT EXISTS users (
-    userID VARCHAR(20) PRIMARY KEY,
+    userID VARCHAR(16) PRIMARY KEY,
     displayName VARCHAR(16) NOT NULL,
-    userName VARCHAR(12) NOT NULL,
+    displayPic VARCHAR(200),
     tag VARCHAR(200),
     email VARCHAR(50) NOT NULL,
     password VARCHAR(60) NOT NULL,
@@ -12,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
 )
 
 CREATE TABLE IF NOT EXISTS cats (
-    catID VARCHAR(20) PRIMARY KEY, 
+    catID INT AUTO_INCREMENT PRIMARY KEY, 
     creatorID VARCHAR(20) NOT NULL, 
     CONSTRAINT fk_creator
     FOREIGN KEY (creatorID) REFERENCES users(userID),
@@ -26,7 +27,7 @@ CREATE TABLE IF NOT EXISTS cats (
 )
 
 CREATE TABLE IF NOT EXISTS photos (
-    photoID VARCHAR(20) PRIMARY KEY,
+    photoID INT AUTO_INCREMENT PRIMARY KEY,
     link VARCHAR NOT NULL,
     catUID VARCHAR(20) NOT NULL,
     CONSTRAINT fk_catID
@@ -34,6 +35,7 @@ CREATE TABLE IF NOT EXISTS photos (
     posterID NOT NULL,
     CONSTRAINT fk_userID
     FOREIGN KEY (posterID) REFERENCES users(userID),
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 
@@ -46,3 +48,12 @@ CREATE TABLE IF NOT EXISTS favorites (
     FOREIGN KEY (photoID) REFERENCES photos(photoID),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
+
+CREATE TABLE IF NOT EXISTS tags (
+    tagName CHAR(20) PRIMARY KEY,
+    photoID NOT NULL,
+    constraint fk_tagphoto
+    FOREIGN KEY (photoID) REFERENCES photos(photoID)
+)
+
+-- might need to make tags it's own referene table at some point

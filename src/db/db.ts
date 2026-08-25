@@ -1,7 +1,6 @@
 import mariadb from 'mariadb'
 import {db, username, password} from "./dbDetails";
 
-
 const pool = mariadb.createPool ({
     host: 'localhost', user: username, password: password
 });
