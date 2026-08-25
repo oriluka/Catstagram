@@ -1,14 +1,15 @@
 import mariadb from 'mariadb'
+import {db, username, password} from "./dbDetails";
+
 
 const pool = mariadb.createPool ({
-    host: 'localhost'
+    host: 'localhost', user: username, password: password
 });
 
 async function asyncfunction(){
     let connection;
     try{
         connection = await pool.getConnection();
-
         // insert queries to DB here 
 
         // Get all 
