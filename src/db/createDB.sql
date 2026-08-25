@@ -3,8 +3,8 @@ USE catgram;
 
 CREATE TABLE IF NOT EXISTS users (
     userID VARCHAR(20) PRIMARY KEY,
-    displayName VARCHAR(16),
-    userName VARCHAR(12),
+    displayName VARCHAR(16) NOT NULL,
+    userName VARCHAR(12) NOT NULL,
     tag VARCHAR(200),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
@@ -21,9 +21,20 @@ CREATE TABLE IF NOT EXISTS cats (
 )
 
 CREATE TABLE IF NOT EXISTS photos (
+    photoID VARCHAR(20) PRIMARY KEY,
     link VARCHAR,
     catUID,
     CONSTRAINT fk_catID
     FOREIGN KEY (catUID) REFERENCES cats(catID)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+
+CREATE TABLE IF NOT EXISTS favorites (
+    userID,
+    constraint fk_likeuser
+    FOREIGN KEY (userID) REFERENCES users(userID),
+    photoID,
+    constraint fk_photoid
+    FOREIGN KEY (photoID) REFERENCES photos(photoID),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
